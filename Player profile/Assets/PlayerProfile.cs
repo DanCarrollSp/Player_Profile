@@ -45,21 +45,21 @@ public class PlayerProfile : MonoBehaviour
     public List<ScoreType> scoreTypes = new List<ScoreType>();
 
 
-    //Combat stats:
-    [SerializeField] private bool showCombatStats = false; // Foldout toggle
-    public bool enableCombatStatTracking = false;
-    public int damageDealt = 0;
-    public int damageTaken = 0;
-    public int enemiesSlain = 0;
-    public int playerDeaths = 0;
-
-
     //Distance stats:
     [SerializeField] private bool showDistanceStats = false; // Foldout toggle
     public bool enableDistanceStatTracking = false;
     public float totalDistanceTravelled = 0;
     public float currentSessionTravelAmount = 0;
     public float previousSessionTravelAmount = 0;
+
+
+    //Combat stats:
+    [SerializeField] private bool showCombatStats = false; // Foldout toggle
+    public bool enableCombatStatTracking = false;
+    public float damageDealt = 0;
+    public float damageTaken = 0;
+    public int enemiesSlain = 0;
+    public int playerDeaths = 0;
 
 
     //Event stats:
@@ -76,10 +76,11 @@ public class PlayerProfile : MonoBehaviour
     [SerializeField] private bool showConfigureOptions = false; // Foldout toggle
     public bool eraseProfileDataOnNextPlay = false;
     public bool saveProfileData = false;
-    public float saveInterval = 5;
+    [Tooltip("Amount is in seconds.")]
+    public int saveIntervalInSeconds = 5;
 
     //Component configure variables
-    private float timer;
+    private int timer;
 
 
 
@@ -100,7 +101,8 @@ public class PlayerProfile : MonoBehaviour
     
     private void OnApplicationQuit()
     {
-        previousSessionLenght = currentSessionLenght;
+        previousSessionLenght = currentSessionLenght;//Previous session Time
+        previousSessionTravelAmount = currentSessionTravelAmount;//Previous session Distance travelled
         if (saveProfileData) saveData();
     }
 
@@ -120,11 +122,11 @@ public class PlayerProfile : MonoBehaviour
         if (saveProfileData)
         {
             //Saves profile data based on set saveInterval
-            timer += Time.deltaTime;
-            if (timer >= saveInterval)
+            timer += (int)Time.deltaTime;
+            if (timer >= saveIntervalInSeconds)
             {
                 saveData();
-                timer = 0f;
+                timer = 0;
                 Debug.Log("Player Profile Saved");
             }
         }
@@ -145,13 +147,29 @@ public class PlayerProfile : MonoBehaviour
     {
 
     }
-
-    void updateCombat()
+    
+    //Local vars
+    private Vector3 lastPosition;
+    void updateDistance()
     {
+        if (lastPosition == default)
+        {
+            lastPosition = transform.position;
+            return;
+        }
 
+        //Calculate how far the scripts parent has moved since the last update
+        float distanceMoved = Vector3.Distance(transform.position, lastPosition);
+
+        //Add that amount to both totalDistanceTravelled and currentSessionTravelAmount
+        totalDistanceTravelled += distanceMoved;
+        currentSessionTravelAmount += distanceMoved;
+
+        //Update the stored position for the next frame
+        lastPosition = transform.position;
     }
 
-    void updateDistance()
+    void updateCombat()
     {
 
     }
@@ -184,12 +202,12 @@ public class PlayerProfile : MonoBehaviour
 
         //Save Distance stats
         PlayerPrefs.SetFloat("totalDistanceTravelled", totalDistanceTravelled);
-        PlayerPrefs.SetFloat("currentSessionTravelAmount", currentSessionTravelAmount);
+        //PlayerPrefs.SetFloat("currentSessionTravelAmount", currentSessionTravelAmount); // Will never be saved as its only counting the current session
         PlayerPrefs.SetFloat("previousSessionTravelAmount", previousSessionTravelAmount);
 
         //Save Combat stats
-        PlayerPrefs.SetInt("damageDealt", damageDealt);
-        PlayerPrefs.SetInt("damageTaken", damageTaken);
+        PlayerPrefs.SetFloat("damageDealt", damageDealt);
+        PlayerPrefs.SetFloat("damageTaken", damageTaken);
         PlayerPrefs.SetInt("enemiesSlain", enemiesSlain);
         PlayerPrefs.SetInt("playerDeaths", playerDeaths);
 
@@ -225,8 +243,8 @@ public class PlayerProfile : MonoBehaviour
         previousSessionTravelAmount = PlayerPrefs.GetFloat("previousSessionTravelAmount");
 
         //Read Combat stats
-        damageDealt = PlayerPrefs.GetInt("damageDealt");
-        damageTaken = PlayerPrefs.GetInt("damageTaken");
+        damageDealt = PlayerPrefs.GetFloat("damageDealt");
+        damageTaken = PlayerPrefs.GetFloat("damageTaken");
         enemiesSlain = PlayerPrefs.GetInt("enemiesSlain");
         playerDeaths = PlayerPrefs.GetInt("playerDeaths");
 
@@ -315,6 +333,27 @@ public class PlayerProfile : MonoBehaviour
         }
 
         lastAction = "loss"; // Update last action
+    }
+
+
+
+
+    //Combat functions
+    public void addDamageDealt(int addAmount)
+    {
+        damageDealt += addAmount;
+    }
+    public void addDamageReceived(int addAmount)
+    {
+        damageTaken += addAmount;
+    }
+    public void addEnemiesSlain(int addAmount)
+    {
+        enemiesSlain += addAmount;
+    }
+    public void addPlayerDeaths(int addAmount)
+    {
+        playerDeaths += addAmount;
     }
 
 }

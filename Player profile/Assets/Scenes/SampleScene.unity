@@ -383,20 +383,20 @@ MonoBehaviour:
   totalTimePlayed: 0
   currentSessionLenght: 0
   previousSessionLenght: 0
-  showScoreStats: 0
+  showScoreStats: 1
   enableScoreStatTracking: 1
   wins: 0
   losses: 0
   winStreak: 0
   loseStreak: 0
   scoreTypes: []
-  showDistanceStats: 1
-  enableDistanceStatTracking: 1
+  showDistanceStats: 0
+  enableDistanceStatTracking: 0
   totalDistanceTravelled: 0
   currentSessionTravelAmount: 0
   previousSessionTravelAmount: 0
   showCombatStats: 0
-  enableCombatStatTracking: 1
+  enableCombatStatTracking: 0
   damageDealt: 0
   damageTaken: 0
   enemiesSlain: 0
