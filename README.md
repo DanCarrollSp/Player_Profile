@@ -59,4 +59,5 @@ The Player Profile package includes a **built-in menu** for managing player data
 
 ---
 
-By leveraging the versatility of the Player Profile package, you can effortlessly integrate detailed player statistics, event tracking, and robust data management into your game. These features enhance the player experience while providing valuable insights for developers.
+
+## Functions Guide
