@@ -39,8 +39,8 @@ public class PlayerProfileEditor : Editor
     private SerializedProperty showDistanceStats; // Foldout toggle
     private SerializedProperty enableDistanceStatTracking;//Enable checkbox
     private SerializedProperty totalDistanceTravelled;
-    private SerializedProperty currentSessionTravelledAmount;
-    private SerializedProperty previousSessionTravelledAmount;
+    private SerializedProperty currentSessionTravelAmount;
+    private SerializedProperty previousSessionTravelAmount;
 
     //Event stats:
     private SerializedProperty showEventStats; // Foldout toggle
@@ -56,6 +56,7 @@ public class PlayerProfileEditor : Editor
     private SerializedProperty showConfigureOptions; // Foldout toggle
     private SerializedProperty eraseProfileDataOnNextPlay;
     private SerializedProperty stopSavingProfileData;
+    private SerializedProperty saveInterval;
 
 
 
@@ -115,8 +116,8 @@ public class PlayerProfileEditor : Editor
         enableDistanceStatTracking = serializedObject.FindProperty("enableDistanceStatTracking");//Enable checkbox
         showDistanceStats = serializedObject.FindProperty("showDistanceStats"); // Foldout toggle
         totalDistanceTravelled = serializedObject.FindProperty("totalDistanceTravelled");
-        currentSessionTravelledAmount = serializedObject.FindProperty("currentSessionTravelledAmount");
-        previousSessionTravelledAmount = serializedObject.FindProperty("previousSessionTravelledAmount");
+        currentSessionTravelAmount = serializedObject.FindProperty("currentSessionTravelAmount");
+        previousSessionTravelAmount = serializedObject.FindProperty("previousSessionTravelAmount");
 
 
 
@@ -151,6 +152,7 @@ public class PlayerProfileEditor : Editor
         showConfigureOptions = serializedObject.FindProperty("showConfigureOptions");
         eraseProfileDataOnNextPlay = serializedObject.FindProperty("eraseProfileDataOnNextPlay");
         stopSavingProfileData = serializedObject.FindProperty("stopSavingProfileData");
+        saveInterval = serializedObject.FindProperty("saveInterval");
 
     }
 
@@ -225,8 +227,8 @@ public class PlayerProfileEditor : Editor
                 EditorGUI.indentLevel++;
 
                 EditorGUILayout.PropertyField(totalDistanceTravelled);
-                EditorGUILayout.PropertyField(currentSessionTravelledAmount);
-                EditorGUILayout.PropertyField(previousSessionTravelledAmount);
+                EditorGUILayout.PropertyField(currentSessionTravelAmount);
+                EditorGUILayout.PropertyField(previousSessionTravelAmount);
                 EditorGUILayout.Space(5);
 
 
@@ -290,6 +292,7 @@ public class PlayerProfileEditor : Editor
         {
             EditorGUILayout.PropertyField(eraseProfileDataOnNextPlay);
             EditorGUILayout.PropertyField(stopSavingProfileData);
+            EditorGUILayout.PropertyField(saveInterval);
         }
 
 
