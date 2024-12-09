@@ -76,8 +76,10 @@ The Player Profile package includes a **built-in menu** for managing player data
 - **addEnemiesSlain(int addAmount)**: Calling addEnemiesSlain(x) will add x to the enemiesSlain stat.
 - **addPlayerDeaths(int addAmount)**: Calling addPlayerDeaths(x) will add x to the playerDeaths stat.
 
-
-
+### **Event function**
+- **addOccurrences(int listElement, int addOccurrence)**: Calling addOccurrences(x , y) will add y to the x event stat.
+- EG. If you add an event type to the event list in the inspector by pressing + on the bottom right of the list in the inspector menu and call it "Trees Chopped".
+- If it is the 0 element in the list, calling addOccurrence(0,1) will add 1 to the "Trees chopped" statistic you created.
 
 
 
