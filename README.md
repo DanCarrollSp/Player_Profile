@@ -68,7 +68,7 @@ The Player Profile package includes a **built-in menu** for managing player data
 - Both winStreak() and loseStreak() will handle the winning and loosing streak statistics without needing to be called from outside the component, based on the win and losses stats.
 
 ### **Distance functions**
-- Distance statistics are calculated by the movement of the GameObject the component is attached to.
+- Distance statistics are calculated in the script by the movement of the GameObject the component is attached to.
 
 ### **Combat functions**
 - **addDamageDealt(int addAmount)**: Calling addDamageDealt(x) will add x to the damagedDealt stat.
