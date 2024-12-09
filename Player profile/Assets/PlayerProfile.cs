@@ -176,10 +176,10 @@ public class PlayerProfile : MonoBehaviour
         PlayerPrefs.SetFloat("previousSessionLenght", previousSessionLenght);
 
         //Save Score stats
-        PlayerPrefs.SetFloat("wins", wins);
-        PlayerPrefs.SetFloat("losses", losses);
-        PlayerPrefs.SetFloat("winStreak", winStreak);
-        PlayerPrefs.SetFloat("loseStreak", loseStreak);
+        PlayerPrefs.SetInt("wins", wins);
+        PlayerPrefs.SetInt("losses", losses);
+        PlayerPrefs.SetInt("winStreak", winStreak);
+        PlayerPrefs.SetInt("loseStreak", loseStreak);
         //Put code in here to save data in the list
 
         //Save Distance stats
@@ -188,16 +188,16 @@ public class PlayerProfile : MonoBehaviour
         PlayerPrefs.SetFloat("previousSessionTravelAmount", previousSessionTravelAmount);
 
         //Save Combat stats
-        PlayerPrefs.SetFloat("damageDealt", damageDealt);
-        PlayerPrefs.SetFloat("damageTaken", damageTaken);
-        PlayerPrefs.SetFloat("enemiesSlain", enemiesSlain);
-        PlayerPrefs.SetFloat("playerDeaths", playerDeaths);
+        PlayerPrefs.SetInt("damageDealt", damageDealt);
+        PlayerPrefs.SetInt("damageTaken", damageTaken);
+        PlayerPrefs.SetInt("enemiesSlain", enemiesSlain);
+        PlayerPrefs.SetInt("playerDeaths", playerDeaths);
 
         //Save Event stats
-        PlayerPrefs.SetFloat("totalEventOccurrences", totalEventOccurrences);
-        PlayerPrefs.SetFloat("eventWithMostOccurances", eventWithMostOccurances);
-        PlayerPrefs.SetFloat("eventWithLeastOccurances", eventWithLeastOccurances);
-        PlayerPrefs.SetFloat("uniqueEventOcurrances", uniqueEventOcurrances);
+        PlayerPrefs.SetInt("totalEventOccurrences", totalEventOccurrences);
+        PlayerPrefs.SetInt("eventWithMostOccurances", eventWithMostOccurances);
+        PlayerPrefs.SetInt("eventWithLeastOccurances", eventWithLeastOccurances);
+        PlayerPrefs.SetInt("uniqueEventOcurrances", uniqueEventOcurrances);
         //Put code in here to save data in the list
 
         PlayerPrefs.Save();
@@ -277,4 +277,44 @@ public class PlayerProfile : MonoBehaviour
         /// Now that data has been reset, clear player prefs of their values also
         saveData();
     }
+
+
+
+    //Score vars
+    private string lastAction = "";
+    //Score functions
+    public void addWin(int addAmount)
+    {
+        wins += addAmount;
+
+        if (lastAction == "win")
+        {
+            winStreak += addAmount; // Increase win streak
+        }
+        else
+        {
+            winStreak = addAmount; // Reset win streak to the current addition
+            loseStreak = 0;        // Reset lose streak
+        }
+
+        lastAction = "win"; // Update last action
+    }
+
+    public void addLosses(int addAmount)
+    {
+        losses += addAmount;
+
+        if (lastAction == "loss")
+        {
+            loseStreak += addAmount; // Increase lose streak
+        }
+        else
+        {
+            loseStreak = addAmount; // Reset lose streak to the current addition
+            winStreak = 0;          // Reset win streak
+        }
+
+        lastAction = "loss"; // Update last action
+    }
+
 }
