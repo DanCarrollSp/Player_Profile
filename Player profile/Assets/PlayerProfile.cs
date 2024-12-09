@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -17,6 +18,21 @@ public class EventType
     public string name; // The name of the event that may occur (e.g., Going to the principals office or falling down a well)
     public int value;   // The amount of times this event has occured
 }
+
+
+//For saving and reading lists to Playerprefs
+[System.Serializable]
+public class ScoreTypeListWrapper
+{
+    public List<ScoreType> list;
+}
+
+[System.Serializable]
+public class EventTypeListWrapper
+{
+    public List<EventType> list;
+}
+
 
 
 
@@ -65,10 +81,10 @@ public class PlayerProfile : MonoBehaviour
     //Event stats:
     [SerializeField] private bool showEventStats = false; // Foldout toggle
     public bool enableEventStatTracking = false;
-    public int uniqueEventOcurrances = 0;
+    public int uniqueEventOccurrances = 0;
     public int totalEventOccurrences = 0;
-    public int eventWithMostOccurances = 0;
-    public int eventWithLeastOccurances = 0;
+    public string eventWithMostOccurances = "Not set";
+    public string eventWithLeastOccurances = "Not set";
     public List<EventType> eventTypes = new List<EventType>();
 
 
@@ -95,6 +111,7 @@ public class PlayerProfile : MonoBehaviour
         }
         else
         {
+            //saveData();
             readData();
         }
     }
@@ -111,12 +128,8 @@ public class PlayerProfile : MonoBehaviour
     private void Update()
     {
         if (enableTimeStatTracking == true) updateTime();
-        if (enableScoreStatTracking == true) updateScore();
-        if (enableCombatStatTracking == true) updateCombat();
         if (enableDistanceStatTracking == true) updateDistance();
         if (enableEventStatTracking == true) updateEvent();
-
-        updateConfigureOptions();
 
 
         if (saveProfileData)
@@ -133,21 +146,13 @@ public class PlayerProfile : MonoBehaviour
     }
 
 
-
     void updateTime()
     {
         totalTimePlayed += Time.deltaTime;
         currentSessionLenght += Time.deltaTime;
-
-        //previousSessionLenght =
-
-    }
-
-    void updateScore()
-    {
-
     }
     
+
     //Local vars
     private Vector3 lastPosition;
     void updateDistance()
@@ -169,19 +174,50 @@ public class PlayerProfile : MonoBehaviour
         lastPosition = transform.position;
     }
 
-    void updateCombat()
-    {
-
-    }
 
     void updateEvent()
     {
+        // First, handle the case where there are no events
+        if (eventTypes.Count == 0)
+        {
+            totalEventOccurrences = 0;
+            uniqueEventOccurrances = 0;
 
-    }
+            eventWithMostOccurances = "";
+            eventWithLeastOccurances = "";
+            return;
+        }
 
-    void updateConfigureOptions()
-    {
+        // Calculate total occurrences and unique occurrences
+        int total = 0;
+        int uniqueCount = 0;
+        foreach (var evt in eventTypes)
+        {
+            total += evt.value;
+            if (evt.value > 0)
+                uniqueCount++;
+        }
 
+        totalEventOccurrences = total;
+        uniqueEventOccurrances = uniqueCount;
+
+        // Find the events with the most and least occurrences
+        // Start by assuming the first event is both max and min
+        EventType maxEvent = eventTypes[0];
+        EventType minEvent = eventTypes[0];
+
+        foreach (var evt in eventTypes)
+        {
+            if (evt.value > maxEvent.value)
+                maxEvent = evt;
+
+            if (evt.value < minEvent.value)
+                minEvent = evt;
+        }
+
+        // Assign the names to the string fields
+        eventWithMostOccurances = maxEvent.name;
+        eventWithLeastOccurances = minEvent.name;
     }
 
 
@@ -198,7 +234,10 @@ public class PlayerProfile : MonoBehaviour
         PlayerPrefs.SetInt("losses", losses);
         PlayerPrefs.SetInt("winStreak", winStreak);
         PlayerPrefs.SetInt("loseStreak", loseStreak);
-        //Put code in here to save data in the list
+        //Serialize and Save ScoreTypes
+        ScoreTypeListWrapper scoreWrapper = new ScoreTypeListWrapper { list = scoreTypes };
+        string scoreJson = JsonUtility.ToJson(scoreWrapper);
+        PlayerPrefs.SetString("ScoreTypes", scoreJson);
 
         //Save Distance stats
         PlayerPrefs.SetFloat("totalDistanceTravelled", totalDistanceTravelled);
@@ -213,10 +252,13 @@ public class PlayerProfile : MonoBehaviour
 
         //Save Event stats
         PlayerPrefs.SetInt("totalEventOccurrences", totalEventOccurrences);
-        PlayerPrefs.SetInt("eventWithMostOccurances", eventWithMostOccurances);
-        PlayerPrefs.SetInt("eventWithLeastOccurances", eventWithLeastOccurances);
-        PlayerPrefs.SetInt("uniqueEventOcurrances", uniqueEventOcurrances);
-        //Put code in here to save data in the list
+        PlayerPrefs.SetString("eventWithMostOccurances", eventWithMostOccurances);
+        PlayerPrefs.SetString("eventWithLeastOccurances", eventWithLeastOccurances);
+        PlayerPrefs.SetInt("uniqueEventOccurrances", uniqueEventOccurrances);
+        //Serialize and Save EventTypes
+        EventTypeListWrapper eventWrapper = new EventTypeListWrapper { list = eventTypes };
+        string eventJson = JsonUtility.ToJson(eventWrapper);
+        PlayerPrefs.SetString("EventTypes", eventJson);
 
         PlayerPrefs.Save();
     }
@@ -235,7 +277,14 @@ public class PlayerProfile : MonoBehaviour
         losses = PlayerPrefs.GetInt("losses");
         winStreak = PlayerPrefs.GetInt("winStreak");
         loseStreak = PlayerPrefs.GetInt("loseStreak");
-        //Put code in here to Read data in the list
+        //Read ScoreTypes
+        string scoreJson = PlayerPrefs.GetString("ScoreTypes", "");
+        if (!string.IsNullOrEmpty(scoreJson))
+        {
+            ScoreTypeListWrapper scoreWrapper = JsonUtility.FromJson<ScoreTypeListWrapper>(scoreJson);
+            scoreTypes = scoreWrapper.list;
+        }
+        else scoreTypes = new List<ScoreType>();
 
         //Read Distance stats
         totalDistanceTravelled = PlayerPrefs.GetFloat("totalDistanceTravelled");
@@ -250,10 +299,17 @@ public class PlayerProfile : MonoBehaviour
 
         //Read Event stats
         totalEventOccurrences = PlayerPrefs.GetInt("totalEventOccurrences");
-        eventWithMostOccurances = PlayerPrefs.GetInt("eventWithMostOccurances");
-        eventWithLeastOccurances = PlayerPrefs.GetInt("eventWithLeastOccurances");
-        uniqueEventOcurrances = PlayerPrefs.GetInt("uniqueEventOcurrances");
-        //Put code in here to Read data in the list
+        eventWithMostOccurances = PlayerPrefs.GetString("eventWithMostOccurances");
+        eventWithLeastOccurances = PlayerPrefs.GetString("eventWithLeastOccurances");
+        uniqueEventOccurrances = PlayerPrefs.GetInt("uniqueEventOccurrances");
+        //Read EventTypes
+        string eventJson = PlayerPrefs.GetString("EventTypes", "");
+        if (!string.IsNullOrEmpty(eventJson))
+        {
+            EventTypeListWrapper eventWrapper = JsonUtility.FromJson<EventTypeListWrapper>(eventJson);
+            eventTypes = eventWrapper.list;
+        }
+        else eventTypes = new List<EventType>();
     }
 
 
@@ -285,9 +341,9 @@ public class PlayerProfile : MonoBehaviour
 
         //Erase Event stats
         totalEventOccurrences = 0;
-        eventWithMostOccurances = 0;
-        eventWithLeastOccurances = 0;
-        uniqueEventOcurrances = 0;
+        eventWithMostOccurances = "";
+        eventWithLeastOccurances = "";
+        uniqueEventOccurrances = 0;
         //Put code in here to erase data in the list but not the list itself
 
 
@@ -352,7 +408,6 @@ public class PlayerProfile : MonoBehaviour
 
 
 
-
     //Combat functions
     public void addDamageDealt(int addAmount)
     {
@@ -371,4 +426,22 @@ public class PlayerProfile : MonoBehaviour
         playerDeaths += addAmount;
     }
 
+
+
+    //Event functions
+    //Allowing addtion and subtraction of event occurances
+    public void addOccurrences(int listElement, int addOccurrence)
+    {
+        //Checks if the provided index is within the bounds of the list
+        if (listElement >= 0 && listElement < eventTypes.Count)
+        {
+            //Add the specified value to the existing value of the selected element
+            eventTypes[listElement].value += addOccurrence;
+        }
+        else
+        {
+            //Handle cases where the index is out of bounds
+            Debug.LogWarning("Invalid list element index. Please provide a valid index.");
+        }
+    }
 }

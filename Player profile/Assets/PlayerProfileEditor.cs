@@ -45,7 +45,7 @@ public class PlayerProfileEditor : Editor
     //Event stats:
     private SerializedProperty showEventStats; // Foldout toggle
     private SerializedProperty enableEventStatTracking;//Enable checkbox
-    private SerializedProperty uniqueEventOcurrances;
+    private SerializedProperty uniqueEventOccurrances;
     private SerializedProperty totalEventOccurrences;
     private SerializedProperty eventWithMostOccurances;
     private SerializedProperty eventWithLeastOccurances;
@@ -125,7 +125,7 @@ public class PlayerProfileEditor : Editor
         enableEventStatTracking = serializedObject.FindProperty("enableEventStatTracking");
         showEventStats = serializedObject.FindProperty("showEventStats"); // Foldout toggle
         totalEventOccurrences = serializedObject.FindProperty("totalEventOccurrences");
-        uniqueEventOcurrances = serializedObject.FindProperty("uniqueEventOcurrances");
+        uniqueEventOccurrances = serializedObject.FindProperty("uniqueEventOccurrances");
         eventWithMostOccurances = serializedObject.FindProperty("eventWithMostOccurances");
         eventWithLeastOccurances = serializedObject.FindProperty("eventWithLeastOccurances");
         //
@@ -274,7 +274,7 @@ public class PlayerProfileEditor : Editor
                 EditorGUILayout.PropertyField(totalEventOccurrences);
                 EditorGUILayout.PropertyField(eventWithMostOccurances);
                 EditorGUILayout.PropertyField(eventWithLeastOccurances);
-                EditorGUILayout.PropertyField(uniqueEventOcurrances);
+                EditorGUILayout.PropertyField(uniqueEventOccurrances);
                 EditorGUILayout.Space(5);
 
                 eventList.DoLayoutList();
