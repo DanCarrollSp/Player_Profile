@@ -70,7 +70,7 @@ The Player Profile package includes a **built-in menu** for managing player data
 ### **Distance functions**
 - Distance statistics are calculated by the movement of the GameObject the component is attached to.
 
-### **Distance functions**
+### **Combat functions**
 - **addDamageDealt(int addAmount)**: Calling addDamageDealt(x) will add x to the damagedDealt stat.
 - **addDamageReceived(int addAmount)**: Calling addDamageReceived(x) will add x to the damageReceived stat.
 - **addEnemiesSlain(int addAmount)**: Calling addEnemiesSlain(x) will add x to the enemiesSlain stat.
