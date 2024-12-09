@@ -81,6 +81,10 @@ Distance statistics are calculated in the script by the movement of the GameObje
 - EG. If you add an event type to the event list in the inspector by pressing + on the bottom right of the list in the inspector menu and call it "Trees Chopped".
 - If it is the 0 element in the list, calling addOccurrence(0,1) will add 1 to the "Trees chopped" statistic you created.
 
+### **Saving Data**
+- **Erase profile data on next play**: Enabling this bool will cause all saved data to be wiped on the next launch of play mode.
+- **Save profile data**: Enabling this will cause all data to be saved between game sessions for debug purposes. It is enabled by default.
+- **Save interval in seconds**: The value of this determines how often periodic saves occur, if saving is enabled saving will also occur on game shutdown, if saving is disabled the game will NOT save peridoically regardless of interval.
 
 
 
