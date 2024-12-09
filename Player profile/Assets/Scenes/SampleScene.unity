@@ -334,13 +334,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: Default Name
-  showTimeStats: 1
-  enableTimeStatTracking: 1
+  showTimeStats: 0
+  enableTimeStatTracking: 0
   totalTimePlayed: 0
   currentSessionLenght: 0
   previousSessionLenght: 0
-  showScoreStats: 0
-  enableScoreStatTracking: 0
+  showScoreStats: 1
+  enableScoreStatTracking: 1
   wins: 0
   losses: 0
   winStreak: 0
@@ -364,9 +364,9 @@ MonoBehaviour:
   eventWithMostOccurances: 0
   eventWithLeastOccurances: 0
   eventTypes: []
-  showConfigureOptions: 0
+  showConfigureOptions: 1
   eraseProfileDataOnNextPlay: 0
-  stopSavingProfileData: 0
+  saveProfileData: 1
   saveInterval: 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

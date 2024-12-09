@@ -75,7 +75,7 @@ public class PlayerProfile : MonoBehaviour
     //Component configure options
     [SerializeField] private bool showConfigureOptions = false; // Foldout toggle
     public bool eraseProfileDataOnNextPlay = false;
-    public bool stopSavingProfileData = false;
+    public bool saveProfileData = false;
     public float saveInterval = 5;
 
     //Component configure variables
@@ -97,6 +97,13 @@ public class PlayerProfile : MonoBehaviour
             readData();
         }
     }
+    
+    private void OnApplicationQuit()
+    {
+        previousSessionLenght = currentSessionLenght;
+        if (saveProfileData) saveData();
+    }
+
 
     //Update component variables
     private void Update()
@@ -110,13 +117,16 @@ public class PlayerProfile : MonoBehaviour
         updateConfigureOptions();
 
 
-        //Saves profile data based on set saveInterval
-        timer += Time.deltaTime;
-        if (timer >= saveInterval)
+        if (saveProfileData)
         {
-            saveData();
-            timer = 0f;
-            Debug.Log("Player Profile Saved");
+            //Saves profile data based on set saveInterval
+            timer += Time.deltaTime;
+            if (timer >= saveInterval)
+            {
+                saveData();
+                timer = 0f;
+                Debug.Log("Player Profile Saved");
+            }
         }
     }
 
@@ -162,7 +172,7 @@ public class PlayerProfile : MonoBehaviour
     {
         //Save Time stats
         PlayerPrefs.SetFloat("totalTimePlayed", totalTimePlayed);
-        PlayerPrefs.SetFloat("currentSessionLenght", currentSessionLenght);
+        //PlayerPrefs.SetFloat("currentSessionLenght", currentSessionLenght); // Will never be saved as its only counting the current session
         PlayerPrefs.SetFloat("previousSessionLenght", previousSessionLenght);
 
         //Save Score stats

@@ -55,7 +55,7 @@ public class PlayerProfileEditor : Editor
     //Component configure options
     private SerializedProperty showConfigureOptions; // Foldout toggle
     private SerializedProperty eraseProfileDataOnNextPlay;
-    private SerializedProperty stopSavingProfileData;
+    private SerializedProperty saveProfileData;
     private SerializedProperty saveInterval;
 
 
@@ -151,7 +151,7 @@ public class PlayerProfileEditor : Editor
         //Component configure options
         showConfigureOptions = serializedObject.FindProperty("showConfigureOptions");
         eraseProfileDataOnNextPlay = serializedObject.FindProperty("eraseProfileDataOnNextPlay");
-        stopSavingProfileData = serializedObject.FindProperty("stopSavingProfileData");
+        saveProfileData = serializedObject.FindProperty("saveProfileData");
         saveInterval = serializedObject.FindProperty("saveInterval");
 
     }
@@ -291,7 +291,7 @@ public class PlayerProfileEditor : Editor
         if (showConfigureOptions.boolValue)
         {
             EditorGUILayout.PropertyField(eraseProfileDataOnNextPlay);
-            EditorGUILayout.PropertyField(stopSavingProfileData);
+            EditorGUILayout.PropertyField(saveProfileData);
             EditorGUILayout.PropertyField(saveInterval);
         }
 
