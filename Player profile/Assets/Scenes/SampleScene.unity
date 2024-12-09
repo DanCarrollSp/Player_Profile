@@ -389,7 +389,15 @@ MonoBehaviour:
   losses: 0
   winStreak: 0
   loseStreak: 0
-  scoreTypes: []
+  scoreTypes:
+  - name: Bob
+    value: 0
+  - name: neck
+    value: 0
+  - name: tree
+    value: 0
+  - name: cool
+    value: 0
   showDistanceStats: 0
   enableDistanceStatTracking: 0
   totalDistanceTravelled: 0

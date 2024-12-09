@@ -335,6 +335,21 @@ public class PlayerProfile : MonoBehaviour
         lastAction = "loss"; // Update last action
     }
 
+    public void addScore(int listElement, int addValue)
+    {
+        //Checks if the provided index is within the bounds of the list
+        if (listElement >= 0 && listElement < scoreTypes.Count)
+        {
+            //Add the specified value to the existing value of the selected element
+            scoreTypes[listElement].value += addValue;
+        }
+        else
+        {
+            //Handle cases where the index is out of bounds
+            Debug.LogWarning("Invalid list element index. Please provide a valid index.");
+        }
+    }
+
 
 
 

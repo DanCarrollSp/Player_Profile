@@ -26,5 +26,14 @@ public class test : MonoBehaviour
         {
             playerProfile.addLosses(1);
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            playerProfile.addScore(1, 3);
+        }
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            playerProfile.addScore(3, 1);
+        }
     }
 }
