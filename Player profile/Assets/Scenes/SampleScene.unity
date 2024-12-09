@@ -378,7 +378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: Default Name
-  showTimeStats: 0
+  showTimeStats: 1
   enableTimeStatTracking: 1
   totalTimePlayed: 0
   currentSessionLenght: 0
@@ -392,12 +392,12 @@ MonoBehaviour:
   scoreTypes:
   - name: ree
     value: 21
-  showDistanceStats: 0
+  showDistanceStats: 1
   enableDistanceStatTracking: 0
   totalDistanceTravelled: 0
   currentSessionTravelAmount: 0
   previousSessionTravelAmount: 0
-  showCombatStats: 0
+  showCombatStats: 1
   enableCombatStatTracking: 0
   damageDealt: 0
   damageTaken: 0
