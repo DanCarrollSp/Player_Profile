@@ -1,3 +1,6 @@
+Link to this file in DOC format
+https://setuo365-my.sharepoint.com/:w:/g/personal/c00272187_setu_ie/ETXeJE2pV5BNn_7UCxFRIFgBqO5DPsCNTf5tbOPXLJX2hw?e=VUX3h5
+
 # Player Profile Guide
 
 This guide provides step-by-step instructions for setting up and using the **Player Profile** package in Unity.
