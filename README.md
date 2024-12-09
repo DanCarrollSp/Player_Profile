@@ -61,3 +61,26 @@ The Player Profile package includes a **built-in menu** for managing player data
 
 
 ## Functions Guide
+
+### **Score functions**
+- **addWin(int addAmount)**: Calling addWin(x) will add x to the wins stat.
+- **addLosses(int addAmount)**: Calling addLosses(x) will add x to the losses stat.
+- Both winStreak() and loseStreak() will handle the winning and loosing streak statistics without needing to be called from outside the component, based on the win and losses stats.
+
+### **Distance functions**
+- Distance statistics are calculated by the movement of the GameObject the component is attached to.
+
+### **Distance functions**
+- **addDamageDealt(int addAmount)**: Calling addDamageDealt(x) will add x to the damagedDealt stat.
+- **addDamageReceived(int addAmount)**: Calling addDamageReceived(x) will add x to the damageReceived stat.
+- **addEnemiesSlain(int addAmount)**: Calling addEnemiesSlain(x) will add x to the enemiesSlain stat.
+- **addPlayerDeaths(int addAmount)**: Calling addPlayerDeaths(x) will add x to the playerDeaths stat.
+
+
+
+
+
+
+
+
+
