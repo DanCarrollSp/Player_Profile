@@ -1,0 +1,7 @@
+{
+  "name": "ie.setu.playerprofile",
+  "version": "1.0.0",
+  "displayName": "Player Profile",
+  "description": "A Unity package for player profile management.",
+  "unity": "2022.3"
+}
