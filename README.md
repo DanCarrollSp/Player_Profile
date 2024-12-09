@@ -65,7 +65,7 @@ The Player Profile package includes a **built-in menu** for managing player data
 ### **Score functions**
 - **addWin(int addAmount)**: Calling addWin(x) will add x to the wins stat.
 - **addLosses(int addAmount)**: Calling addLosses(x) will add x to the losses stat.
-- Both winStreak() and loseStreak() will handle the winning and loosing streak statistics without needing to be called from outside the component, based on the win and losses stats.
+Both winStreak() and loseStreak() will handle the winning and loosing streak statistics without needing to be called from outside the component, based on the win and losses stats.
 
 ### **Distance functions**
 - Distance statistics are calculated in the script by the movement of the GameObject the component is attached to.
@@ -78,8 +78,8 @@ The Player Profile package includes a **built-in menu** for managing player data
 
 ### **Event function**
 - **addOccurrences(int listElement, int addOccurrence)**: Calling addOccurrences(x , y) will add y to the x event stat.
-- EG. If you add an event type to the event list in the inspector by pressing + on the bottom right of the list in the inspector menu and call it "Trees Chopped".
-- If it is the 0 element in the list, calling addOccurrence(0,1) will add 1 to the "Trees chopped" statistic you created.
+  EG. If you add an event type to the event list in the inspector by pressing + on the bottom right of the list in the inspector menu and call it "Trees Chopped".
+  If it is the 0 element in the list, calling addOccurrence(0,1) will add 1 to the "Trees chopped" statistic you created.
 
 
 
