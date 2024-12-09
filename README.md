@@ -68,7 +68,7 @@ The Player Profile package includes a **built-in menu** for managing player data
 Both winStreak() and loseStreak() will handle the winning and loosing streak statistics without needing to be called from outside the component, based on the win and losses stats.
 
 ### **Distance functions**
-- Distance statistics are calculated in the script by the movement of the GameObject the component is attached to.
+Distance statistics are calculated in the script by the movement of the GameObject the component is attached to.
 
 ### **Combat functions**
 - **addDamageDealt(int addAmount)**: Calling addDamageDealt(x) will add x to the damagedDealt stat.
@@ -78,8 +78,8 @@ Both winStreak() and loseStreak() will handle the winning and loosing streak sta
 
 ### **Event function**
 - **addOccurrences(int listElement, int addOccurrence)**: Calling addOccurrences(x , y) will add y to the x event stat.
-  EG. If you add an event type to the event list in the inspector by pressing + on the bottom right of the list in the inspector menu and call it "Trees Chopped".
-  If it is the 0 element in the list, calling addOccurrence(0,1) will add 1 to the "Trees chopped" statistic you created.
+EG. If you add an event type to the event list in the inspector by pressing + on the bottom right of the list in the inspector menu and call it "Trees Chopped".
+If it is the 0 element in the list, calling addOccurrence(0,1) will add 1 to the "Trees chopped" statistic you created.
 
 
 
