@@ -378,29 +378,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: Default Name
-  showTimeStats: 1
+  showTimeStats: 0
   enableTimeStatTracking: 1
   totalTimePlayed: 0
   currentSessionLenght: 0
   previousSessionLenght: 0
-  showScoreStats: 1
+  showScoreStats: 0
   enableScoreStatTracking: 1
   wins: 0
   losses: 0
   winStreak: 0
   loseStreak: 0
   scoreTypes: []
+  showDistanceStats: 1
+  enableDistanceStatTracking: 1
+  totalDistanceTravelled: 0
+  currentSessionTravelAmount: 0
+  previousSessionTravelAmount: 0
   showCombatStats: 0
-  enableCombatStatTracking: 0
+  enableCombatStatTracking: 1
   damageDealt: 0
   damageTaken: 0
   enemiesSlain: 0
   playerDeaths: 0
-  showDistanceStats: 0
-  enableDistanceStatTracking: 0
-  totalDistanceTravelled: 0
-  currentSessionTravelAmount: 0
-  previousSessionTravelAmount: 0
   showEventStats: 0
   enableEventStatTracking: 0
   uniqueEventOcurrances: 0
@@ -411,7 +411,7 @@ MonoBehaviour:
   showConfigureOptions: 1
   eraseProfileDataOnNextPlay: 0
   saveProfileData: 1
-  saveInterval: 5
+  saveIntervalInSeconds: 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
