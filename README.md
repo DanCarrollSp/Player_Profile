@@ -18,14 +18,13 @@ This guide provides step-by-step instructions for setting up and using the **Pla
      }
    }
 
-
 2. **Attach the Component to a GameObject**
 
 1. Locate the **PlayerProfile.cs** script in the Player Profile package.
 2. Drag and drop the script onto a GameObject in your scene.
 3. Once attached, you will see the component's properties and configuration options in the Inspector.
 
-
+---
 
 ## Using the Player Profile Component
 
@@ -52,6 +51,12 @@ The component also features an **Event Stats** system that allows you to:
 - Create and monitor custom events specific to your game.
 - Track unique occurrences, making the component universally adaptable to various game genres.
 
+### **Data Backup and Management**
+The Player Profile package includes a **built-in menu** for managing player data:
+- **Backup and Save Data**: Uses `PlayerPrefs` to store player data securely.
+- **Custom Save Interval**: Set an editable interval for automatic saving or disable saving altogether.
+- **Erase Saved Data**: Clear saved data for debugging purposes with ease.
+
 ---
 
-By leveraging the versatility of the Player Profile package, you can effortlessly integrate detailed player statistics and tracking into your game, enhancing the player experience and providing valuable gameplay insights.
+By leveraging the versatility of the Player Profile package, you can effortlessly integrate detailed player statistics, event tracking, and robust data management into your game. These features enhance the player experience while providing valuable insights for developers.
